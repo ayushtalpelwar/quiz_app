@@ -26,14 +26,21 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswers.length == question.length) {
       setState(() {
         activeScreen = 'result_screen';
-        selectedAnswers = [];
+        // selectedAnswers = [];
       });
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   void switchScreen() {
     setState(() {
-      activeScreen = "question_screen";
+      activeScreen = "question_screen"; 
     });
   }
 
@@ -48,6 +55,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == "result_screen") {
       screenWidget = ResultsScreen(
         chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
       );
     }
 
